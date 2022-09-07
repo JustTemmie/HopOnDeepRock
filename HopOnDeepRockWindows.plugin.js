@@ -60,7 +60,6 @@ module.exports = (() => {
       if (message.author.bot) return;
       if (message.author.id === this.userId) return;
       if (message.content )
-      console.log(message.content);
       if (message.content.includes("hop on deep rock")) execSync('start steam://rungameid/548430', { encoding: 'utf-8' });
     }
 
