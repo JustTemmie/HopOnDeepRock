@@ -2,7 +2,7 @@
  * @name HopOnDeepRock
  * @author Temmie
  * @description Forces you into hopping on deep rock when your friends demand it <3
- * @version 0.0.3
+ * @version 0.0.4
  * @authorId 725539745572323409
  * @donate https://paypal.me/TemmieTem
  * @source https://github.com/JustTemmie/HopOnDeepRock/HopOnDeepRock.plugin.js
@@ -24,13 +24,13 @@
          authors: [{
              name: "Temmie"
          }],
-         version: "0.0.3",
+         version: "0.0.4",
          description: "Forces you into hopping on deep rock when your friends demand it <3",
          github_raw: "https://raw.githubusercontent.com/JustTemmie/HopOnDeepRock/main/HopOnDeepRock.plugin.js",
      },
      changelog: [
          {
-             title : "v0.0.3",
+             title : "v0.0.4",
              items: ["just some tests.",
                      "yknow, things."],
          }
