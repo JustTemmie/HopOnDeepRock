@@ -1,5 +1,5 @@
 /**
- * @name HopOnDeepRock
+ * @name HopOnDeepRockaaa
  * @author Temmie
  * @description Forces you into hopping on deep rock when your friends demand it <3
  * @version 0.0.4
@@ -20,7 +20,7 @@
  
  const config = {
      info: {
-         name: "HopOnDeepRock",
+         name: "HopOnDeepRockaaa",
          authors: [{
              name: "Temmie"
          }],
