@@ -74,7 +74,7 @@ const {Logger, Patcher, Settings, PluginUpdater, PluginUtilities} = Library;
 return class HopOnDeepRock extends Plugin {
     async onStart() {
         // Check for Plugin Updates
-        PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/danegottwald/BetterDiscordPlugins/main/HideStreamPreview/HideStreamPreview.plugin.js");
+        PluginUpdater.checkForUpdate(this.getName(), this.getVersion(), "https://raw.githubusercontent.com/JustTemmie/HopOnDeepRock/main/HopOnDeepRock.plugin.js");
 
         // Load Settings from Config on Startup
         Object.entries(PluginUtilities.loadData("HopOnDeepRock", "settings", {})).forEach(([setting, value]) => {
