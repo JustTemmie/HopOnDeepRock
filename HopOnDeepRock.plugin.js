@@ -16,7 +16,8 @@
  //   }
  // };
 
- 
+const Dispatcher = ZLibrary.DiscordModules.Dispatcher;
+
 module.exports = (() => {
     const defaultSettings = {
         on: true,
@@ -70,7 +71,7 @@ return !global.ZeresPluginLibrary ? class {
     const plugin = (Plugin, Library) => {
 
 const {Logger, Patcher, Settings, Utilities, PluginUpdater, PluginUtilities} = Library;
- 
+
 return class HopOnDeepRock extends Plugin {
     async onStart() {
         settings = PluginUtilities.loadSettings('HopOnDeepRock', settings);
@@ -82,24 +83,13 @@ return class HopOnDeepRock extends Plugin {
     
         this.getOS()
 
-        this.userId = BdApi.findModuleByProps('getId').getId();
-        const execSync = require('child_process').execSync;
-        
-        let dispatchModule = BdApi.findModuleByProps('dispatch', 'subscribe');
-        BdApi.Patcher.after(this.getName(), dispatchModule, 'dispatch', this.handleMessage.bind(this));
-        Patcher.before(Logger, "log", (t, a) => {
-            a[0] = "Patched Message: " + a[0];
-        });
-        
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA");
+        console.log("connecting")
 
+        let cb = e => {
+            this.handleMessage(e)
+        }
+        
+        Dispatcher.subscribe('MESSAGE_CREATE', cb);
         };
     
     makeSwitch(iv, callback) {
@@ -136,12 +126,6 @@ return class HopOnDeepRock extends Plugin {
             settings.os = OS
         }
         console.log(settings.os)
-        
-        var keyword = "start"
-        if (settings.os.includes("windows")) keyword = "start";
-        else if (settings.os.includes("linux") || settings.os.includes("unix")) keyword = "steam";
-        else PluginUtilities.showToast("sorry, that doesn't seem to be a valid operating system");;
-        
     }
      
     getSettingsPanel() {
@@ -160,7 +144,7 @@ return class HopOnDeepRock extends Plugin {
         
         panel.append(
             new Settings.Switch(
-                "enabled", "disable or enable the plugin, don't know why you wouldn't just use BD's built in one but eh", settings.on,
+                "enabled", "disable or enable the plugin, BD's toggle button doesn't work with the plugin", settings.on,
                 (val) => {
                     settings.on = val;
                     this.saveSettings();
@@ -230,16 +214,22 @@ return class HopOnDeepRock extends Plugin {
         this.getOS()
     }
  
-    handleMessage(_, args) {
+    handleMessage(event) {
         if (settings.on == false) return;
-        let event = args[0];
         if (event.type !== 'MESSAGE_CREATE') return;
-        let { message } = event;
-        if (message.author.bot) return;
-        if (message.author.id === this.userId) console.log(message.content);
-        if (message.author.id === this.userId) return;
+        if (event.message.author.bot) return;
+        // var exec = require('child_process').exec;
+        // exec("ls")
         for (let i in settings.gameIDs) {
-            if (message.content.includes(settings.phrases[i])) console.log(keyword + ' steam://rungameid/' + String(settings.gameIDs[i]));
+            if (event.message.content.includes(settings.phrases[i])) {
+                var keyword = "start"
+                if (settings.os.includes("windows")) keyword = "start";
+                else if (settings.os.includes("linux") || settings.os.includes("unix")) keyword = "steam";
+                else PluginUtilities.showToast("sorry, that doesn't seem to be a valid operating system");;
+
+                console.log(keyword + ' steam://rungameid/' + String(settings.gameIDs[i]));
+
+            }
         }
     }
  
