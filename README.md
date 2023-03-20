@@ -1,5 +1,7 @@
 ### HopOnDeepRock
 
+BROKEN, will not fix
+
 plugin for BetterDiscord
 
 opens the game Deep Rock Galactic whenever anyone says the phrase "hop on deep rock"
